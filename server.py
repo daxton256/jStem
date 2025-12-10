@@ -43,7 +43,7 @@ def home():
     existing_auth = request.cookies.get("access_token")
     print(existing_auth)
     if not existing_auth or not checkValidation(existing_auth)[0]:
-        return redirect("/login")
+        return redirect("login")
 
     return render_template("home.html")
 
@@ -55,7 +55,7 @@ def index():
 def login():
     existing_auth = request.cookies.get("access_token")
     if existing_auth and checkValidation(existing_auth)[0]:
-        return redirect("/home")
+        return redirect("home")
     
     return render_template("login.html")
 
@@ -63,7 +63,7 @@ def login():
 def signup():
     existing_auth = request.cookies.get("access_token")
     if existing_auth and checkValidation(existing_auth)[0]:
-        return redirect("/home")
+        return redirect("home")
 
     return render_template("signup.html")
 
@@ -93,7 +93,7 @@ def api_login():
 
     access_token = genAT(username)
 
-    resp = make_response(redirect("/home")) 
+    resp = make_response(redirect("home")) 
     resp.set_cookie('access_token', access_token)
     return resp
 
@@ -122,7 +122,7 @@ def api_signup():
 
     access_token = genAT(username)
 
-    resp = make_response(redirect("/home")) 
+    resp = make_response(redirect("home")) 
     resp.set_cookie('access_token', access_token)
     return resp
 
