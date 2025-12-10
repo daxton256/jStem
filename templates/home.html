@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="/static/design.css">
-<link rel="stylesheet" href="/static/styles.css">
+<link rel="stylesheet" href="static/design.css">
+<link rel="stylesheet" href="static/styles.css">
 <title>jStem - home</title>
 <div class="container">
     <div class="jStems">
@@ -45,7 +45,7 @@
 
     async function getStem(query, source="soundcloud") {
 
-        const response = await fetch("/stem?query=" + encodeURIComponent(query));
+        const response = await fetch("stem?query=" + encodeURIComponent(query));
         const data = await response.json();
 
         //fully loading audio to prevent desync and lag
@@ -82,7 +82,7 @@
 
     async function recieveStems() {
         console.log("load");
-        const request = await fetch("/api/userstems");
+        const request = await fetch("api/userstems");
         if(request.ok) {
             const content = await request.json();
             content.forEach(element => {
@@ -100,7 +100,7 @@
     }
 
     async function editStem(id, content) {
-        const request = await fetch("/api/editstem", {
+        const request = await fetch("api/editstem", {
             method: 'POST',
             headers: {
             'Accept': 'application/json',
@@ -127,7 +127,7 @@
     }
 
     async function createStem() {
-        const request = await fetch("/api/createstem");
+        const request = await fetch("api/createstem");
         if(request.ok) {
             const content = await request.json();
 
