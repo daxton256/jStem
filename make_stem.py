@@ -65,7 +65,7 @@ def from_soundcloud(songid: str):
             if(os.path.exists(f"songs/{songid}")):
                 shutil.rmtree(f"songs/{songid}") #Removing song in case of corruption from error
 
-            return ""
+            return "", 500
 
 if __name__ == "__main__":
     from_soundcloud(soundcloud_search("Freddie dredd cha cha"))
