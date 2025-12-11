@@ -18,7 +18,7 @@ conn = mariadb.connect(
 
 conn.auto_reconnect = True 
 
-jwt_secret = secrets.token_hex(32)
+jwt_secret = os.getenv("jwt_secret")
 
 def genAT(username: str, length: int = 604800):
     exp_time = int(time.time()) + length
