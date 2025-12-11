@@ -2,6 +2,7 @@ import subprocess
 from dotenv import load_dotenv
 import os, requests
 import shutil
+from pydub import AudioSegment
 
 load_dotenv()
 
@@ -42,7 +43,7 @@ def from_soundcloud(songid: str):
             os.makedirs("songs", exist_ok=True)
             os.makedirs(f"songs/{songid}", exist_ok=True)
 
-            with open(f"songs/{songid}/original{songid}.mp3", "wb") as f:
+            with open(f"songs/{songid}/original{songid}.mp3", "wb") as f: #Saving as original{songid} so demucs makes a folder named with the song id instead of original to prevent concurrency issues.
                 f.write(trackDL.content)
 
 
@@ -54,11 +55,14 @@ def from_soundcloud(songid: str):
             ]
             subprocess.run(cmd, check=True)
 
-            shutil.copytree(f"songs/mdx_extra_q/original{songid}", f"songs/{songid}", dirs_exist_ok=True)
+
+            parts = ["bass", "drums", "other", "vocals"]
+            for part in parts:
+                AudioSegment.from_wav(f"songs/mdx_extra_q/original{songid}/{part}.wav").export(f"songs/{songid}/{part}.mp3", format="mp3") #Converting song to mp3 and moving it to new home
 
             shutil.rmtree(f"songs/mdx_extra_q/original{songid}")
 
-            os.rename(f"songs/{songid}/original{songid}.mp3", f"songs/{songid}/original.mp3")
+            os.rename(f"songs/{songid}/original{songid}.mp3", f"songs/{songid}/original.mp3") #Renaming song back to original after extraction done and files moved.
 
             return f"songs/{songid}", songinfo["title"], songinfo["artwork_url"]
         except:

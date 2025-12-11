@@ -190,7 +190,7 @@ def editstem():
 def get_stems():
     search_query = request.args.get("query")
     song_path, title, art = make_stem.from_soundcloud(make_stem.soundcloud_search(search_query))
-    return {"path": song_path, "bass": f"{song_path}/bass.wav", "drums": f"{song_path}/drums.wav", "other": f"{song_path}/other.wav", "vocals": f"{song_path}/vocals.wav", "title": title, "artwork_url": art}
+    return {"path": song_path, "bass": f"{song_path}/bass.mp3", "drums": f"{song_path}/drums.mp3", "other": f"{song_path}/other.mp3", "vocals": f"{song_path}/vocals.mp3", "title": title, "artwork_url": art}
 
 @app.route("/songs/<id>/<file>", methods=["GET"])
 def serve_sound(id, file):
