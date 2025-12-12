@@ -170,6 +170,22 @@
         }
     }
 
+    navigator.mediaSession.setActionHandler("play", () => {
+        playStem();
+    });
+
+    navigator.mediaSession.setActionHandler("pause", () => {
+        pauseStem();
+    });
+
+    navigator.mediaSession.setActionHandler("previoustrack", () => {
+        lastStem();
+    });
+
+    navigator.mediaSession.setActionHandler("nexttrack", () => {
+        nextStem();
+    });
+
     function playStem() {
         bass.play();
         drums.play();
