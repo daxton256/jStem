@@ -58,6 +58,7 @@ def from_soundcloud(songid: str):
 
             parts = ["bass", "drums", "other", "vocals"]
             for part in parts:
+                print("Converting:", part)
                 AudioSegment.from_wav(f"songs/mdx_extra_q/original{songid}/{part}.wav").export(f"songs/{songid}/{part}.mp3", format="mp3") #Converting song to mp3 and moving it to new home
 
             shutil.rmtree(f"songs/mdx_extra_q/original{songid}")
